@@ -7,10 +7,10 @@ config("clspv_opt_config") {
   # include deps
   include_dirs = [
     "../../include",
-    "//{llvm_root}llvm/tools/opt",
+    "//{llvm_root}/llvm/tools/opt",
   ]
 
-  configs = [ "//${llvm_build_root}build:llvm_code" ]
+  configs = [ "//${llvm_build_root}/build:llvm_code" ]
 }
 
 executable("clspv-opt") {

@@ -1,30 +1,9 @@
 import("//build_overrides/llvm.gni")
 import("//build_overrides/spirv_tools.gni")
-import("symlink.gni")
 
 print("Using ${llvm_root} as root for LLVM source tree")
 print("Using ${llvm_build_root} for the LLVM build related gn files")
 print("Using spirv headers from ${spirv_tools_spirv_headers_dir}")
-
-# Establish LLVM GN file symlinks to pick them in appropriate source tree
-# location
-llvm_secondary_source = "//${llvm_build_root}secondary/"
-llvm_symlink_target = "//utils/gn/${llvm_root}"
-llvm_symlink_stamp = "${root_build_dir}/llvm_symlink.stamp"
-exec_script("./scripts/symlink_or_copydir.py",
-            [
-              "--stamp",
-              rebase_path(llvm_symlink_stamp, root_build_dir),
-              rebase_path(llvm_secondary_source),
-              rebase_path(llvm_symlink_target),
-            ],
-            "")
-
-# Add the symlink as build dependency
-symlink_dir("llvm-gn-files") {
-  source = llvm_secondary_source
-  output = llvm_symlink_target
-}
 
 declare_args() {
   # spirv namespace
@@ -130,7 +109,7 @@ action("clspv_baked_opencl_header") {
 
   inputs = [
     "$target_gen_dir/clspv-builtins.h",
-    "//${llvm_root}clang/lib/Headers/opencl-c-base.h",
+    "//${llvm_root}/clang/lib/Headers/opencl-c-base.h",
   ]
 
   outputs = [ "$target_gen_dir/clspv/opencl_builtins_header.h" ]

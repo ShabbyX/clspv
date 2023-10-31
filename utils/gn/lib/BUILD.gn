@@ -100,16 +100,14 @@ source_set("clspv_passes") {
   configs += clspv_configs_overrides_append
   configs -= clspv_configs_overrides_remove
 
-  deps = [ "../:llvm-gn-files" ]
-
-  deps += [
+  deps = [
     "../:clspv_c_strings",
     "../:clspv_glsl",
     "../:clspv_reflection",
   ]
   public_configs = [
-    "//${llvm_build_root}build:llvm_code",
-    "//${llvm_build_root}build:clang_code",
+    "//${llvm_build_root}/build:llvm_code",
+    "//${llvm_build_root}/build:clang_code",
   ]
 
   # need generated includes from the action scripts
@@ -117,19 +115,19 @@ source_set("clspv_passes") {
 
   # LLVM targets
   deps += [
-    "//${llvm_root}llvm/lib/Analysis",
-    "//${llvm_root}llvm/lib/CodeGen",
-    "//${llvm_root}llvm/lib/IR",  # LLVMCore
-    "//${llvm_root}llvm/lib/Passes",
-    "//${llvm_root}llvm/lib/Support",
-    "//${llvm_root}llvm/lib/Transforms/AggressiveInstCombine",
-    "//${llvm_root}llvm/lib/Transforms/IPO",
-    "//${llvm_root}llvm/lib/Transforms/InstCombine",
-    "//${llvm_root}llvm/lib/Transforms/Instrumentation",
-    "//${llvm_root}llvm/lib/Transforms/ObjCARC",
-    "//${llvm_root}llvm/lib/Transforms/Scalar",
-    "//${llvm_root}llvm/lib/Transforms/Utils",
-    "//${llvm_root}llvm/lib/Transforms/Vectorize",
+    "//${llvm_build_root}/secondary/llvm/lib/Analysis",
+    "//${llvm_build_root}/secondary/llvm/lib/CodeGen",
+    "//${llvm_build_root}/secondary/llvm/lib/IR",  # LLVMCore
+    "//${llvm_build_root}/secondary/llvm/lib/Passes",
+    "//${llvm_build_root}/secondary/llvm/lib/Support",
+    "//${llvm_build_root}/secondary/llvm/lib/Transforms/AggressiveInstCombine",
+    "//${llvm_build_root}/secondary/llvm/lib/Transforms/IPO",
+    "//${llvm_build_root}/secondary/llvm/lib/Transforms/InstCombine",
+    "//${llvm_build_root}/secondary/llvm/lib/Transforms/Instrumentation",
+    "//${llvm_build_root}/secondary/llvm/lib/Transforms/ObjCARC",
+    "//${llvm_build_root}/secondary/llvm/lib/Transforms/Scalar",
+    "//${llvm_build_root}/secondary/llvm/lib/Transforms/Utils",
+    "//${llvm_build_root}/secondary/llvm/lib/Transforms/Vectorize",
   ]
 }
 
@@ -141,19 +139,19 @@ static_library("clspv_core") {
   configs -= clspv_configs_overrides_remove
 
   deps = [
-    "//${llvm_root}clang/lib/AST",
-    "//${llvm_root}clang/lib/Basic",
-    "//${llvm_root}clang/lib/CodeGen",
-    "//${llvm_root}clang/lib/Frontend",
-    "//${llvm_root}clang/lib/Serialization",
+    "//${llvm_build_root}/secondary/clang/lib/AST",
+    "//${llvm_build_root}/secondary/clang/lib/Basic",
+    "//${llvm_build_root}/secondary/clang/lib/CodeGen",
+    "//${llvm_build_root}/secondary/clang/lib/Frontend",
+    "//${llvm_build_root}/secondary/clang/lib/Serialization",
 
     # llvm/clang
     ":clspv_passes",
     "../:clspv64_builtin_library",
     "../:clspv_baked_opencl_header",
     "../:clspv_builtin_library",
-    "//${llvm_root}llvm/lib/IRReader",
-    "//${llvm_root}llvm/lib/Linker",
+    "//${llvm_build_root}/secondary/llvm/lib/IRReader",
+    "//${llvm_build_root}/secondary/llvm/lib/Linker",
   ]
 
   # need generated includes from action targets

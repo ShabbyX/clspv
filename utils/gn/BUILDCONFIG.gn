@@ -1,18 +1,18 @@
 import("//build_overrides/llvm.gni")
 
-import("//${llvm_build_root}build/toolchain/compiler.gni")
+import("//${llvm_build_root}/build/toolchain/compiler.gni")
 
 # All targets will get this list of configs by default.
 # Targets can opt out of a config by removing it from their local configs list.
 # If you're adding global flags and don't need targets to be able to opt out,
 # add the flags to compiler_defaults, not to a new config.
 shared_binary_target_configs = [
-  "//${llvm_build_root}build:compiler_defaults",
-  "//${llvm_build_root}build:llvm_code",
-  "//${llvm_build_root}build:no_exceptions",
-  "//${llvm_build_root}build:no_rtti",
-  "//${llvm_build_root}build:thin_archive",
-  "//${llvm_build_root}build:warn_covered_switch_default",
+  "//${llvm_build_root}/build:compiler_defaults",
+  "//${llvm_build_root}/build:llvm_code",
+  "//${llvm_build_root}/build:no_exceptions",
+  "//${llvm_build_root}/build:no_rtti",
+  "//${llvm_build_root}/build:thin_archive",
+  "//${llvm_build_root}/build:warn_covered_switch_default",
 ]
 
 # Apply that default list to the binary target types.
@@ -26,14 +26,14 @@ set_defaults("static_library") {
   configs = shared_binary_target_configs
 }
 set_defaults("shared_library") {
-  configs = shared_binary_target_configs + [ "//${llvm_build_root}build:zdefs" ]
+  configs = shared_binary_target_configs + [ "//${llvm_build_root}/build:zdefs" ]
 }
 set_defaults("source_set") {
   configs = shared_binary_target_configs
 }
 
 if (host_os == "win") {
-  host_toolchain = "//${llvm_build_root}build/toolchain:win"
+  host_toolchain = "//${llvm_build_root}/build/toolchain:win"
 } else {
   host_toolchain = "//toolchain:host"
 }

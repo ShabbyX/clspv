@@ -87,7 +87,7 @@ template("target_toolchain") {
       # be blamed, making the resolution somewhat discoverable.
       assert(gn_version >= 1693,
              "Your GN is too old! " +
-                 "Update it, perhaps by running ${llvm_build_root}get.py")
+                 "Update it, perhaps by running ${llvm_build_root}/get.py")
     }
 
     # Make these apply to all tools below.
